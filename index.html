@@ -13,14 +13,74 @@
     <script type="text/javascript" src="../libs/slick/slick/slick.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <title>Проект WEB</title>
+    <style>
+        /* Дополнительные стили для решения проблемы с кликабельностью */
+        header#head {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header#head video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        .header_back_img {
+            position: absolute;
+            z-index: 2;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 3;
+        }
+        
+        /* Убедимся, что все интерактивные элементы кликабельны */
+        .header_tarif_button,
+        .tarif_button,
+        .team_button,
+        button,
+        a,
+        input,
+        textarea,
+        .menu li,
+        .socials a {
+            position: relative;
+            z-index: 10;
+            cursor: pointer;
+        }
+        
+        /* Улучшение видимости меню */
+        .menus {
+            position: relative;
+            z-index: 100;
+        }
+        
+        /* Для формы */
+        #form_send {
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Скрыть якоря при плавном скролле */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
 
     <!-- 1 -->
 
     <header id="head">
-        <video autoplay loop muted>
+        <video autoplay loop muted playsinline>
             <source src="video.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
         </video>
         <img src="druplicon.svg" class="header_back_img" alt="">
         <div class="container">
@@ -37,30 +97,30 @@
         
                 <nav>
                     <ul class="menu">
-                        <li><a href="">ПОДДЕРЖКА DRUPAL</a></li>
+                        <li><a href="#services">ПОДДЕРЖКА DRUPAL</a></li>
                         <li class="menu_podcat">
-                            <span><a href="">АДМИНИСТРИРОВАНИЕ</a></span>
+                            <span><a href="#supports">АДМИНИСТРИРОВАНИЕ</a></span>
                             <ul>
-                                <li><a href="">МИГРАЦИЯ</a></li>
-                                <li><a href="">БЭКАПЫ</a></li>
-                                <li><a href="">АУДИТ БЕЗОПАСНОСТИ</a></li>
-                                <li><a href="">ОПТИМИЗАЦИЯ СКОРОСТИ</a></li>
-                                <li><a href="">ПЕРЕЕЗД НА HTTPS</a></li>
+                                <li><a href="#tasks">МИГРАЦИЯ</a></li>
+                                <li><a href="#form">БЭКАПЫ</a></li>
+                                <li><a href="#FAQ">АУДИТ БЕЗОПАСНОСТИ</a></li>
+                                <li><a href="#tasks">ОПТИМИЗАЦИЯ СКОРОСТИ</a></li>
+                                <li><a href="#form">ПЕРЕЕЗД НА HTTPS</a></li>
                             </ul>
                         </li>
-                        <li><a href="">ПРОДВИЖЕНИЕ</a></li>
-                        <li><a href="">РЕКЛАМА</a></li>
+                        <li><a href="#team">ПРОДВИЖЕНИЕ</a></li>
+                        <li><a href="#cases">РЕКЛАМА</a></li>
                         <li class="menu_podcat">
-                            <span><a href="">О НАС</a></span>
+                            <span><a href="#about">О НАС</a></span>
                             <ul>
-                                <li><a href="">КОМАНДА</a></li>
-                                <li><a href="">DRUPALGIVE</a></li>
-                                <li><a href="">БЛОГ</a></li>
-                                <li><a href="">КУРСЫ DRUPAL</a></li>
+                                <li><a href="#team">КОМАНДА</a></li>
+                                <li><a href="#reviews">DRUPALGIVE</a></li>
+                                <li><a href="#cases">БЛОГ</a></li>
+                                <li><a href="#form">КУРСЫ DRUPAL</a></li>
                             </ul>
                         </li>
-                        <li><a href="">ПРОЕКТЫ</a></li>
-                        <li><a href="">КОНТАКТЫ</a></li>
+                        <li><a href="#cases">ПРОЕКТЫ</a></li>
+                        <li><a href="#form">КОНТАКТЫ</a></li>
                     </ul>
                 </nav>
             </div>
@@ -69,7 +129,7 @@
                 <div>
                     <h1>Поддержка<br> сайтов на Drupal</h1>
                     <h2>Сопровождение и поддержка сайтов<br>на CMS Drupal любых версий и запущенности</h2>
-                    <button class="header_tarif_button">ТАРИФЫ</button>
+                    <a href="#tarif" class="header_tarif_button">ТАРИФЫ</a>
                 </div>
                 <div class="header_categories">
                     <div>
@@ -287,7 +347,7 @@
                             <div class="tarif_item">Неиспользованные оплаченные часы переносятся на следующий месяц</div>
                             <div class="tarif_item">Предоплата от 6 000 рублей в месяц</div>
                         </div>
-                        <button class="tarif_button">СВЯЖИТЕСЬ С НАМИ!</button>
+                        <a href="#form" class="tarif_button">СВЯЖИТЕСЬ С НАМИ!</a>
                     </div>
 
                     <div class="tarif_category active">
@@ -302,7 +362,7 @@
                             <div class="tarif_item">Неиспользованные оплаченные часы не переносятся</div>
                             <div class="tarif_item">Предоплата от 30 000 рублей в месяц</div>
                         </div>
-                        <button class="tarif_button button_select">СВЯЖИТЕСЬ С НАМИ!</button>
+                        <a href="#form" class="tarif_button button_select">СВЯЖИТЕСЬ С НАМИ!</a>
                     </div>
 
                     <div class="tarif_category">
@@ -317,13 +377,13 @@
                             <div class="tarif_item">Неиспользованные оплаченные часы не переносятся</div>
                             <div class="tarif_item">Предоплата от 270 000 рублей в месяц</div>
                         </div>
-                        <button class="tarif_button">СВЯЖИТЕСЬ С НАМИ!</button>
+                        <a href="#form" class="tarif_button">СВЯЖИТЕСЬ С НАМИ!</a>
                     </div>
                 </div>
 
                 <div class="tarif_info subtitle">Вам не подходят наши тарифы? Оставьте заявку и мы<br> предложим вам индивидуальные условия!</div>
                 <div class="tarif_individual">
-                    <a class="podzag">Получить индивидуальный тариф</a>
+                    <a href="#form" class="podzag">Получить индивидуальный тариф</a>
                 </div>
             </div>
         </section>
@@ -410,7 +470,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="team_button">Вся команда</button>
+                <a href="#team" class="team_button">Вся команда</a>
             </div>
         </section>
 
@@ -873,7 +933,50 @@
         </div>
     </footer>
 
+    <script>
+        // Плавная прокрутка для всех ссылок с якорями
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработка всех ссылок с хешем
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Плавная прокрутка
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Отступ сверху для фиксированного меню
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Обработка кнопок с onclick атрибутами
+            document.querySelectorAll('button[onclick^="location.href"]').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const onclickValue = this.getAttribute('onclick');
+                    const match = onclickValue.match(/location\.href=['"](#[^'"]+)['"]/);
+                    
+                    if (match) {
+                        e.preventDefault();
+                        const targetId = match[1];
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
-
