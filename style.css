@@ -871,25 +871,103 @@ span{
 
 /* 10. partners */
 
-#partners h2{
-    color: #050C33;
-    opacity: 0.7;
-    text-align: left;
-    font-size: 16px;
-}
-#companies{
-    overflow: hidden;
-}
-#companies .slick img{
-    width: 100%;
-    margin: auto;
-}
-#companies .slick-slide{
-    width: clamp(180px, 19vw, 291px);
-    /* height: 155px; */
-    margin: 5px;
+/* Стили для секции партнеров */
+#partners {
+    padding: 80px 0;
+    background-color: #f8f9fa;
 }
 
+#partners h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+#partners h2 {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    font-weight: 400;
+}
+
+.partner-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 180px;
+    border: 1px solid #eaeaea;
+}
+
+.partner-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.partner-name {
+    color: #333;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.partner-description {
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 5px;
+}
+
+/* Убираем стандартный слайдер */
+#companies {
+    display: none;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    #partners h1 {
+        font-size: 2rem;
+    }
+    
+    #partners h2 {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+    
+    .partner-card {
+        min-height: 150px;
+        padding: 20px 15px !important;
+    }
+    
+    .partner-name {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    #partners {
+        padding: 60px 0;
+    }
+    
+    .partner-card {
+        min-height: 130px;
+        padding: 15px 10px !important;
+    }
+    
+    .partner-name {
+        font-size: 1.1rem;
+    }
+    
+    .partner-description {
+        font-size: 0.85rem;
+    }
+}
 /* 11. FAQ  */
 
 #FAQ h1 {
@@ -1680,4 +1758,5 @@ form button{
 html {
     scroll-behavior: smooth;
 }
+
 
