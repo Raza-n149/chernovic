@@ -1677,3 +1677,7 @@ form button{
         right: 80px;
     }
 }
+html {
+    scroll-behavior: smooth;
+}
+
