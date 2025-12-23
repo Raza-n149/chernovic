@@ -889,72 +889,66 @@ span{
     margin: 5px;
 }
 
-/* 11. FAQ  */
-
-#FAQ h1 {
-    margin-top: 90px;
-    margin-bottom: 20px;
+/* Стили для FAQ */
+#AskList > div {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+    transition: all 0.3s ease;
 }
 
-#AskList {
-    counter-reset: questions__item;
-}
-#AskList li{
-    border: 1px #000 solid;
-    padding: 30px;
-}
-#AskList h3{
-    display: inline-block;
-    margin: 0;
-}
-#AskList > div .faq_zag:before{content: counter(questions__item) ".";
-    counter-increment: questions__item;
-    display: block;
-    position: absolute;
-    left: 0;
-    width: 25px;
-    text-align: right;
-    font-weight: 700;
-    font-size: 12px;
-    color: #828a9b;
-    margin-top: 4px;
-}
-#AskList > div{
-    border-radius: 0;
-    box-shadow: none;
+.faq_zag {
     position: relative;
-    padding: 10px 12px 10px 30px;
-    border: 3px solid transparent;
-    transition: border-color .35s;
-    margin: 0;
-    background: 0 0;
-}
-#AskList .text{
-    border: 0;
-    font-weight: 500;
-    font-size: 16px;
-    color: #4e5a73;
-    line-height: 1.37;
-    padding: 0;
-    margin-top: 10px;
-}
-#AskList  > div.active{
-    transition-duration: .175s;
-    border-color: #f14d34;
-}
-#AskList  > div.active .faq_zag{
-    color: #F14D34;
-}
-#AskList  > div:not(.active) .text{
-    display: none;
-}
-#AskList .faq_zag{
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1.22;
+    padding-right: 30px;
     cursor: pointer;
+    font-weight: 600;
+    color: #333;
+    transition: color 0.3s ease;
 }
 
+.faq_zag:hover {
+    color: #007bff;
+}
+
+/* Добавляем иконку плюс/минус */
+.faq_zag::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    font-weight: 300;
+    transition: transform 0.3s ease;
+}
+
+#AskList > div.active .faq_zag::after {
+    content: '−';
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Скрываем ответ по умолчанию */
+#AskList > div .text {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    margin-top: 0;
+}
+
+/* Показываем ответ при активном состоянии */
+#AskList > div.active .text {
+    max-height: 1000px;
+    opacity: 1;
+    margin-top: 15px;
+}
+
+/* Активный вопрос */
+#AskList > div.active {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
 /* 12. form */
 #form{
     background: linear-gradient(261deg, rgba(255, 255, 255, 0.28) -114.85%, rgba(255, 255, 255, 0.00) 69.04%), #040613;
@@ -1679,6 +1673,7 @@ form button{
 html {
     scroll-behavior: smooth;
 }
+
 
 
 
