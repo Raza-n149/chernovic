@@ -1,6 +1,6 @@
-<svg width="291" height="155" viewBox="0 0 291 155" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="200" height="15" viewBox="0 0 291 155" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g clip-path="url(#clip0_94_586)">
-<rect x="0.5" y="0.5" width="290" height="154" rx="4.5" stroke="#E5E5E5"/>
+<rect x="0.5" y="0.5" width="10" height="12" rx="4.5" stroke="#E5E5E5"/>
 <rect x="95" y="59" width="102" height="37" fill="url(#pattern0)"/>
 </g>
 <defs>
