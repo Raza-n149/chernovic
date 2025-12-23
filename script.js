@@ -104,3 +104,145 @@ window.onload = function () {
   };
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const openBtn = document.getElementById('openFormBtn');
+    const closeBtn = document.getElementById('closeFormBtn');
+    const popup = document.getElementById('feedbackPopup');
+    const form = document.getElementById('feedbackForm');
+    const messageArea = document.getElementById('messageArea');
+    const formFields = ['fio', 'email', 'phone', 'org', 'message', 'agree'];
+
+    const FORMSPREE_URL = 'https://formspree.io/f/xvgebbey';
+
+    openBtn.addEventListener('click', () => {
+        popup.style.display = 'flex';
+        history.pushState({ formOpen: true }, '', '#feedback');
+        loadFormData();
+    });
+
+    closeBtn.addEventListener('click', closeForm);
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) closeForm();
+    });
+
+    window.addEventListener('popstate', (e) => {
+        if (!location.hash.includes('feedback')) {
+            popup.style.display = 'none';
+        }
+    });
+
+    function loadFormData() {
+        formFields.forEach(field => {
+            const elem = document.getElementById(field);
+            if (!elem) return;
+            const saved = localStorage.getItem(`feedback_${field}`);
+            if (saved !== null) {
+                if (elem.type === 'checkbox') {
+                    elem.checked = saved === 'true';
+                } else {
+                    elem.value = saved;
+                }
+            }
+        });
+    }
+
+    formFields.forEach(field => {
+        const elem = document.getElementById(field);
+        if (!elem) return;
+        elem.addEventListener('input', () => {
+            const value = elem.type === 'checkbox' ? elem.checked : elem.value;
+            localStorage.setItem(`feedback_${field}`, value);
+        });
+    });
+
+    function closeForm() {
+        popup.style.display = 'none';
+        history.back();
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitBtn = form.querySelector('.btn-submit');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+        submitBtn.disabled = true;
+
+        messageArea.style.display = 'none';
+        messageArea.textContent = '';
+
+        try {
+            const formData = new FormData(form);
+            
+            const email = document.getElementById('email').value;
+            formData.append('_replyto', email);
+            formData.append('_subject', 'Новое сообщение с формы обратной связи');
+
+            const agreeCheckbox = document.getElementById('agree');
+            if (agreeCheckbox) {
+                formData.set('agree', agreeCheckbox.checked ? 'Да' : 'Нет');
+            }
+
+            console.log('Данные для отправки:');
+            for (let [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
+
+            const response = await fetch(FORMSPREE_URL, {
+                method: 'POST',
+                body: formData, 
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            console.log('Статус ответа:', response.status);
+
+            if (response.ok) {
+                showMessage('✅ Сообщение успешно отправлено!', 'success');
+                formFields.forEach(field => localStorage.removeItem(`feedback_${field}`));
+                form.reset();
+            } else {
+                let errorText = 'Ошибка отправки';
+                try {
+                    const result = await response.json();
+                    errorText = result.error || JSON.stringify(result);
+                } catch {
+                    errorText = `Ошибка ${response.status}`;
+                }
+                throw new Error(errorText);
+            }
+        } catch (error) {
+            console.error('Ошибка отправки:', error);
+            
+            
+            let userMessage = error.message;
+            if (error.message.includes('Bad form post request')) {
+                userMessage = 'Неверный формат данных. Проверьте обязательные поля.';
+            } else if (error.message.includes('Failed to fetch')) {
+                userMessage = 'Проблема с интернет-соединением.';
+            } else if (error.message.includes('confirm')) {
+                userMessage = 'Требуется подтверждение email. Проверьте почту!';
+            }
+            
+            showMessage(`❌ ${userMessage}`, 'error');
+        } finally {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+
+    function showMessage(text, type) {
+        messageArea.textContent = text;
+        messageArea.className = type;
+        messageArea.style.display = 'block';
+        setTimeout(() => {
+            messageArea.style.display = 'none';
+        }, 5000);
+    }
+
+    if (location.hash === '#feedback') {
+        popup.style.display = 'flex';
+        loadFormData();
+    }
+});
