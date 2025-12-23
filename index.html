@@ -975,8 +975,36 @@
         });
     </script>
     <script src="script.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Находим все элементы FAQ
+    const faqItems = document.querySelectorAll('#AskList > div');
+    
+    faqItems.forEach(item => {
+        // Находим заголовок вопроса
+        const question = item.querySelector('.faq_zag');
+        
+        // Добавляем курсор указателя
+        question.style.cursor = 'pointer';
+        
+        // Добавляем обработчик клика
+        question.addEventListener('click', function() {
+            // Закрываем все открытые вопросы
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            
+            // Переключаем состояние текущего вопроса
+            item.classList.toggle('active');
+        });
+    });
+});
+</script>
 </body>
 </html>
+
 
 
 
