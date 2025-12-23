@@ -306,10 +306,28 @@
 
         <!-- 4 -->
 
-        <section id="expertise">
-            <h1 class="text-center">Экспертиза в Drupal,<br> опыт 14 лет!</h1>
-            <div class="container">
- 
+                <section id="expertise">
+    <style>
+        /* Исправление для заголовка в секции экспертизы */
+        #expertise h1 {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            display: block !important;
+            width: 100% !important;
+            padding: 0 20px !important;
+        }
+        
+        /* Если нужно центрировать только конкретный заголовок */
+        #expertise .container > h1 {
+            text-align: center;
+            width: 100%;
+            display: block;
+            margin: 0 auto 60px;
+        }
+    </style>
+    <div class="container">
+        <h1>Экспертиза в Drupal,<br> опыт 14 лет!</h1>
                 <div class="header_categories">
                     <div>
                         <div class="podzag">Только системный подход –<br> контроль версий,<br> резервирование и<br> тестирование!</div>
@@ -1418,6 +1436,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+
 
 
 
